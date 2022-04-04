@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+{% endblock %}
+
+{% block title %}SicilyLines{% endblock %}
+
+{% block content %}
+
+<body id="pageAccueil">
+  <div class="masthead">
+    <div class="container h-100 pt-5 pb-5">
+      <div class="row h-100 justify-content-center text-center">
+        <div class="col-lg-6 col-xl-5">
+          <div class="txRight">
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-xl-7">
+          <div class="align-self-end">
+            <h1 class="text-uppercase text-white font-weight-bold">Bienvenue sur <br>SicilyLines</h1>
+            <hr class="divider my-4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<center>
+<div id="randomResa">
+    {% for traversee in traversees|slice(random(5, 12), 4) %}
+    <div class="card" id="resaCard">
+        <img class="card-img-top" src={{ asset('assets/images/bateaux.jpg')}} alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">SicilyLines ⛵</h5>
+            <p class="card-text">Liaison de {{ traversee.liaison.portDepart.nom }} jusqu'à {{ traversee.liaison.portArrivee.nom }} <br>
+            Le départ est prévu pour {{ traversee.heure|date('H:i') }}, 
+            d'une durée de {{ traversee.liaison.duree|date('H:i') }} 
+            le {{ traversee.date|date('d-m-Y') }}<br>
+            à bord du bateau {{ traversee.bateau.nom }}</p>
+          <a href={{ path('resultat_recherche', { idLiaison: traversee.id }) }} class="btn btn-success">Réserver</a>
+        </div>
+    </div>
+    {% endfor %}
+</center>   
+</body>
+{% endblock %}
+    

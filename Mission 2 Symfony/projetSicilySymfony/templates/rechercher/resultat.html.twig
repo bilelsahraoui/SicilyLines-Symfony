@@ -1,0 +1,156 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% block title %}SicilyLines{% endblock %}
+
+{% block content %}
+
+<body>
+    {% for traversee in traversees %}
+    
+    <div class="container bg-light border rounded mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                    <div class ="col">
+                        <h4>Port de départ :  {{traversee.liaison.portDepart.nom}} </h4>
+                    </div>
+                    <div class ="col">
+                        <h4>Port d'arrivée :  {{traversee.liaison.portArrivee.nom}} </h4>
+                    </div>
+                    
+            </div>
+            <div class="col-md-6">
+                    <div class ="col">
+                        <h4>Date du départ :  {{traversee.date|date('d-m-Y') }} </h4>
+                    </div>
+                    <div class ="col">
+                        <h4>Heure de départ :  {{traversee.heure|date('H:i') }} </h4>
+                    </div>
+                    <div class ="col">
+                        <h4>Durée de la traversee :  {{traversee.liaison.duree|date('H:i') }} </h4>
+                    </div>
+            </div>
+        </div>
+        {{ form(form) }}
+        {% if error is defined %}
+            <div class="alert alert-danger" role="alert">
+                {{error}}
+            </div>
+        {% endif %}
+    </div>
+
+    
+
+    {% endfor %}
+
+{% if recap is defined %}
+<br><br>
+<center>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Récapitulatif
+</button>
+</center>
+<br><br>
+{% endif %}
+
+<center>
+<!--Modal Récapitulatif-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Récapitulatif</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div id="modalContStyle">
+    {% for traversee in traversees %}
+        Port de départ : {{ traversee.liaison.portDepart.nom }} <br>
+        Port d'arrivée : {{ traversee.liaison.portArrivee.nom }} <br>
+        Heure de départ : {{ traversee.heure|date('H:i') }} <br>
+        Durée : {{ traversee.liaison.duree|date('H:i') }} <br><br>
+
+
+        {% if nbA1 is defined %}
+            {% if nbA1 >0 %}
+                Nombre d'adulte : {{ nbA1 }} <br>
+            {% endif %}
+        {% endif %}
+
+
+        {% if nbA2 is defined %}
+            {% if nbA2 >0 %}
+                Nombre de junior(8 à 18 ans) : {{ nbA2 }} <br>
+            {% endif %}
+        {% endif %}
+
+
+        {% if nbA3 is defined %}
+            {% if nbA3 >0 %}
+                Nombre d'enfant(0 à 7 ans) : {{ nbA3 }} <br>
+            {% endif %}
+        {% endif %}
+
+
+        {% if nbB1 is defined %}
+            {% if nbB1 >0 %}
+                Nombre de voiture long.inf.4m : {{ nbB1 }} <br>
+            {% endif %}
+        {% endif %}
+
+
+        {% if nbB2 is defined %}
+            {% if nbB2 >0 %}
+                Nombre de voiture long.inf.5m : {{ nbB2 }} <br>
+            {% endif %}
+        {% endif %}
+
+
+        {% if nbC1 is defined %}
+            {% if nbC1 >0 %}
+                Nombre de fourgon : {{ nbC1 }} <br>
+            {% endif %}
+        {% endif %}
+
+
+        {% if nbC2 is defined %}
+            {% if nbC2 >0 %}
+                Nombre de camping car: {{ nbC2 }} <br>
+            {% endif %}
+        {% endif %}
+
+
+        {% if nbC3 is defined %}
+            {% if nbC3 >0 %}
+                Nombre de Camion: {{ nbC3 }} <br>
+            {% endif %}
+        {% endif %}
+
+        ~~~~~~~~~~~~ <br>
+        {% if tarifTotal is defined %}
+            Prix : {{ tarifTotal }} €
+        {% endif %}
+
+    {% endfor %}
+        </div>
+    </div>
+    <div class="modal-footer">
+    <form method="POST" action={{ path('reserver')}}>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        {% if tarifTotal is defined %}
+        <input type="hidden" value={{ tarifTotal }} name="tarifTotal">
+        {% endif %}
+        <input type="hidden" value={{ traversees[0].id }} name="id">
+        <button type="submit" class="btn btn-primary">Réserver</button>
+    </div>
+    </div>
+</div>
+</div>
+</center>
+</body>
+{% endblock %}
+    

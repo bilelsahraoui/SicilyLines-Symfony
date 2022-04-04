@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher{% endblock %}
+
+{% block content %}
+
+
+<div class="container bg-light border rounded mt-5">
+
+    {{ form(recherche) }}
+    <a href={{ path('rechercher_tout') }}><button class="btn btn-secondary btn">Voir tous</button></a>
+</div>
+{% endblock %}

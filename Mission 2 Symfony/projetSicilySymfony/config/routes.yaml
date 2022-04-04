@@ -1,0 +1,66 @@
+index:
+   path: /
+   controller: App\Controller\AccueilController::index
+   host: localhost
+
+accueil:
+   path: /accueil
+   controller: App\Controller\AccueilController::index
+   host: localhost
+
+connexion:
+   path: /login
+   controller: App\Controller\SecurityController::login
+   host: localhost
+
+inscription:
+   path: /inscription
+   controller: App\Controller\InscriptionController::index
+   host: localhost
+
+rechercher:
+   path: /recherche
+   controller: App\Controller\RechercherController::index
+   host: localhost
+
+resultat_recherche:
+   path: /recherche/resultat/{idLiaison}
+   controller: App\Controller\RechercherController::proposition
+   host: localhost
+
+rechercher_tout:
+   path: /recherche/resultat
+   controller: App\Controller\RechercherController::searchAll
+   host: localhost
+
+compte:
+   path: /compte
+   controller: App\Controller\CompteController::index
+   host: localhost
+
+contact:
+   path: /contact
+   controller: App\Controller\ContactController::Contact_Recla_Question
+   host: localhost
+
+liaison:
+   path: /liaison
+   controller: App\Controller\LiaisonController::index
+   host: localhost
+
+reserver:
+   path: /liaison/reserver
+   controller: App\Controller\ReserverController::index
+   host: localhost
+
+reservations:
+   path: /reservations
+   controller: App\Controller\CompteController::reservations
+
+reglages: 
+   path: /reglages
+   controller: App\Controller\CompteController::reglages
+
+social:
+   path: /contact/social
+   controller: App\Controller\ContactController::social

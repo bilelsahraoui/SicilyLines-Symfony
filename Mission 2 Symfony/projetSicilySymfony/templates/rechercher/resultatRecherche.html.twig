@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher{% endblock %}
+
+{% block content %}
+
+
+<div class="container bg-light border rounded mt-5">
+
+{% if acces == true %}
+    {% set nextId = 0 %}
+    {% for resultat in res %}
+        {% for rp in resultat.proposers %}
+            {% for propo in rp.bateau.traversees %}
+                {% if propo.liaison.id != nextId %}
+                    {% if (propo.liaison.portDepart.nom == pDepart.portDepart.nom) and (propo.liaison.portArrivee.nom == pArrivee.portArrivee.nom) %}
+                        <div class="card" id="resaCard">
+                            <center>
+                                <img class="card-img-top" src={{ asset('assets/images/bateaux.jpg')}} alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">SicilyLines ⛵</h5>
+                                        <p class="card-text">Liaison de {{ propo.liaison.portDepart.nom }} jusqu'à {{ propo.liaison.portArrivee.nom }} <br>
+                                        Le départ est prévu pour {{ propo.heure|date('H:i') }}, 
+                                        d'une durée de {{ propo.liaison.duree|date('H:i') }} 
+                                        le {{ propo.date|date('d-m-Y') }}<br>
+                                        à bord du bateau {{ propo.bateau.nom }}</p>
+                                    <a href={{ path('resultat_recherche', { idLiaison: propo.id }) }} class="btn btn-success">Réserver</a>
+                                </div>
+                            </center>   
+                        </div>
+                        {% set nextId = propo.liaison.id %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reserver{% endblock %}
+
+{% block content %}
+<br><br>
+<center>
+    <div id="payementDiv">
+    {% if is_granted("ROLE_USER") %}
+        {{ form(payement) }}
+        En appuyant sur "Payer", vous acceptez les <a href="https://www.termsfeed.com/live/5ecc6415-cacd-4c19-a57d-8f48f821a6b2" target="_blank">EULA</a>
+    {% else %}
+        {{ form(payementClient) }}
+        En appuyant sur "Payer", vous acceptez les <a href="https://www.termsfeed.com/live/5ecc6415-cacd-4c19-a57d-8f48f821a6b2" target="_blank">EULA</a>
+    {% endif %}
+    </div>
+</center>
+
+
+{% endblock %}

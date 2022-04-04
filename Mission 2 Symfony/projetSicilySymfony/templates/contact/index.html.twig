@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<center>
+
+    {# {% if not is_granted("ROLE_USER") %}
+
+        <div class="container bg-light border rounded mt-5">
+            <div class="row pt m-1" id="Contact">
+                <div class="col-md">
+                    <h3>Pour accèder à l'espace gestion/avis, veuillez renseignez votre code de réservation</h3>
+                </div>
+            </div>
+        </div><br>
+
+        {{ form(contact) }}
+        
+        {% if conf is defined %}
+            <a href={{ path('contact') }}><button type="button" class="btn btn-danger">Changer de mode d'authentification</button></a>
+        {% endif %}
+
+    {% else %}
+
+
+    {% endif %} #}
+        <div class="container bg-light border rounded mt-5">
+            <div class="row pt m-1" id="Contact">
+                <div class="col-md">
+                    <h3>Réclamation ou Question</h3>
+                </div>
+            </div>
+            <div class="row p-4">
+            <div class="col-md">
+            {{ form(contacter)}}
+            {% if alert is defined %}
+                <div class="toast">
+                    <div class="toast-header">
+                        Alerte
+                    </div>
+                <div class="toast-body">
+                    {{alert}}
+                </div>
+                </div>
+            {% endif %}
+            </div>
+            </div>
+        </div><br>
+
+    {# <div class="container bg-light border rounded p-4">
+        {{ form(contacter) }}
+    </div> #}
+</center>
+
+{% endblock %}

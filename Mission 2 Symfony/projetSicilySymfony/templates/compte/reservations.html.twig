@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservations{% endblock %}
+
+{% block content %}
+<body id="bgResa">
+<center>
+<div id="bgResa">
+<br><br>
+{% if is_granted("ROLE_USER") %}
+    <div id="listResa">
+        <div class="container bg-light border rounded mt-5">
+            <div class="row pt m-1">
+                <h3>Voici la liste de vos réservations :</h3>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    {% for resa in reservations %}
+    <div class="card" id="resaCard">
+        <img class="card-img-top" src={{ asset('assets/images/bateaux.jpg') }} alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">SicilyLines ⛵</h5>
+            <p class="card-text">Votre réservation part de {{ resa.traversee.liaison.portDepart.nom }} jusqu'à {{ resa.traversee.liaison.portArrivee.nom }} <br>
+            Le départ est prévu pour {{ resa.traversee.heure|date('H:i') }}, 
+            d'une durée de {{ resa.traversee.liaison.duree|date('H:i') }}
+            le {{ resa.traversee.date|date('d-m-Y') }}<br>
+            à bord du bateau {{ resa.traversee.bateau.nom }}</p>
+            <a href="#" class="btn btn-warning">Modifier</a>
+            <a href="#" class="btn btn-danger">Annuler</a>
+        </div>
+    </div>
+    {% endfor %}
+
+{% else %}
+<h1>Oups ! Une erreur s'est produite :/</h1>
+{% endif %}
+
+</div>
+</center>
+</body>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver{% endblock %}
+
+{% block content %}
+
+<br><br>
+<center>
+    <div id="payementDiv">
+    {% if is_granted("ROLE_USER") %}
+        {{ confirm }}
+        <a href={{ path('accueil') }}><br>
+        Retour à l'accueil</a>
+    {% endif %}
+    {% if not is_granted("ROLE_USER") %}
+        {{ confirm }}
+        <a href={{ path('accueil') }}><br>
+        Retour à l'accueil</a>
+    {% endif %}
+    </div>
+</center>
+
+{% endblock %}

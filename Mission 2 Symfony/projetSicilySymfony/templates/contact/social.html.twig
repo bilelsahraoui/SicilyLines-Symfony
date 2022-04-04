@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+
+<center>
+
+    {% if is_granted("ROLE_USER") or (acces == true) %}
+
+        <h1>Réclamation ou question</h1>
+    
+    {% endif %}
+
+</center>
+
+{% endblock %}

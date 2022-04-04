@@ -1,0 +1,67 @@
+.masthead{
+    background:url('../../images/sunset.png');
+    padding-top: 72px;
+    padding-bottom: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#modalContStyle{
+    background: #EFEFEFEF; 
+    border-radius: 30px;
+}
+
+#payementDiv{
+    padding-top: 1%;
+    background: #EFEFEFEF; 
+    border-radius: 30px;
+    width: 45%;
+    padding-bottom: 1%;
+}
+
+.masthead p{
+    font-size: 20px;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+#resaCard{
+    width: 18rem;
+    display: inline-block;
+    margin: .8rem;
+
+}
+
+#bgResa{
+    background:url('../../images/backgroundResa.jpg');
+    padding-bottom: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#listResa{
+    opacity: 0.7;
+    width: 25%;
+    background: #EFEFEF;
+    box-shadow: 0.1;
+    text-align:center;
+    height:2.5em;
+}
+
+#randomResa{
+    background:url('../../images/backgroundPropo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#pageAccueil{
+    background:url('../../images/backgroundPropo.jpgTraverseeRepository $traverseeRepository');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
