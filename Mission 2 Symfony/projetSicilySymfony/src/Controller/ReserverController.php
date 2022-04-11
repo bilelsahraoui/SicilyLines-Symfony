@@ -33,32 +33,41 @@ use App\Entity\User;
 
 class ReserverController extends AbstractController
 {
-
+    //Fonction pour la route /reserver
     public function index(Request $request, ReservationRepository $reserverRepository, ManagerRegistry $doctrine,
     TraverseeRepository $traverseeRepository): Response
     {  
-        $id = $request->request->get(key:'id');
-        $tarifTot = $request->request->get(key:'tarifTotal');
+        $id = $request->request->get(key:'id'); //Récuperation de la variable POST id
+        $tarifTot = $request->request->get(key:'tarifTotal'); //Récuperation de la variable POST tarifTotal
 
+        //Formulaire de payement
         $formClient = $this->createFormBuilder()
+
+            //Champ (Input) de type text
             ->add('creditCard', TextType::class,[
                 'label' => 'Carte de crédit',
                 'required' => false,
                 'attr' => ['class' => 'form-control',
                 'style' => 'width: 300px']
             ])
+
+            //Champ (Input) de type text
             ->add('cvv', TextType::class,[
                 'label' => 'CVV',
                 'required' => false,
                 'attr' => ['class' => 'form-control',
                 'style' => 'width: 300px']
             ])
+
+            //Champ (Input) de type text
             ->add('identity', TextType::class,[
                 'label' => 'Nom sur la carte de crédit',
                 'required' => false,  
                 'attr' => ['class' => 'form-control',
                 'style' => 'width: 300px']
             ])
+
+            //Champ (Input) de type text
             ->add('tel', TextType::class,[
                 'label' => 'Entrez votre numéro de téléphone',
                 'required' => true,  
@@ -72,17 +81,23 @@ class ReserverController extends AbstractController
                     
                     )))
                 ])
+
+            //Champ (Input) de type email
             ->add('mail', EmailType::class,[
                 'label' => 'Entrez votre e-mail',
                 'required' => true,  
                 'attr' => ['class' => 'form-control',
                     'style' => 'width: 300px']
                 ])
+
+            //Champ (Input) de type caché pour la méthode post
             ->add('idTrav', HiddenType::class,[
                 'attr' => [
                     'value' => $id,
                 ]
             ])
+
+            //Champ de type submit
             ->add('Confirmer', SubmitType::class,[
                 'label' => 'Payer',
                 'attr' => [
@@ -91,12 +106,16 @@ class ReserverController extends AbstractController
                 ]
             ])
 
+            //Formation du formulaire
             ->getForm();
             
+        //Récuperation de la requête envoyée
         $formClient->handleRequest($request);
         
+        //Vérification si le formulaire à été submit        
         if ($formClient->isSubmitted()){
 
+            //Variable data récupère les données saisie dans le formulaire
             $data = $formClient->getData();
 
             //flush
@@ -147,6 +166,7 @@ class ReserverController extends AbstractController
                     
                     }
                     else{
+                        //Récuperation de l'utilisateur avec le token
                         $user = $this->get('security.token_storage')->getToken()->getUser();
                         if($user){
 
@@ -156,6 +176,7 @@ class ReserverController extends AbstractController
 
 
                         //Reservation
+                        //Code généré aléatoirement
                         $code = $reserverRepository->getRandomString(10);
                         $reservation = new Reservation();
                         $reservation->setCodeReservation($code);
@@ -174,37 +195,50 @@ class ReserverController extends AbstractController
 
                     }
                 }
+                    //Message de confirmation + affichage du code
                     $confirm = "Vous avez bien réservé cette traversée ! Votre code de réservation est : ".$code.".";
 
+                //Render du formulaire de validation    
                 return $this->render("reserver/validation.html.twig", [
                     'confirm' => $confirm,
                 ]);
         };
 
+        //Formulaire d'inscription
         $form = $this->createFormBuilder()
+
+            //Champ (Input) de type text
             ->add('creditCard', TextType::class,[
                 'label' => 'Carte de crédit',
                 'required' => false,
                 'attr' => ['class' => 'form-control',
                 'style' => 'width: 300px']
             ])
+
+            //Champ (Input) de type text
             ->add('cvv', TextType::class,[
                 'label' => 'CVV',
                 'required' => false,
                 'attr' => ['class' => 'form-control',
                 'style' => 'width: 300px']
             ])
+
+            //Champ (Input) de type text
             ->add('identity', TextType::class,[
                 'label' => 'Nom sur la carte de crédit',
                 'required' => false,  
                 'attr' => ['class' => 'form-control',
                 'style' => 'width: 300px']
             ])
+
+            //Champ de type caché ayant la valeur de ID
             ->add('idTrav', HiddenType::class,[
                 'attr' => [
                     'value' => $id,
                 ]
             ])
+
+            //Champ de type submit
             ->add('Confirmer', SubmitType::class,[
                 'label' => 'Payer',
                 'attr' => [
@@ -213,9 +247,12 @@ class ReserverController extends AbstractController
                 ]
             ])
 
+            //Formation du formulaire
             ->getForm();
-            ;
 
+        ;
+
+        //Render du formulaire de réservation
         return $this->render('reserver/index.html.twig', [
             'payement' => $form->createView(),
             'payementClient' => $formClient->createView(),

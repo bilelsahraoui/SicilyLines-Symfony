@@ -21,12 +21,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class AccueilController extends AbstractController
 {
 
+    //Fonction pour la route / ou /accueil
     public function index(TraverseeRepository $traverseeRepository): Response
     {
-        $traversees = $traverseeRepository->findAll();
+        $traversees = $traverseeRepository->findAll(); //Récupération de toutes les traversées
 
         return $this->render('accueil/accueil.html.twig', [
-            'traversees' => $traversees,
+            'traversees' => $traversees, //Passage des traversées en paramètre du render
         ]);
     }
 

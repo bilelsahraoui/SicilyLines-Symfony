@@ -43,13 +43,13 @@ contact:
    controller: App\Controller\ContactController::Contact_Recla_Question
    host: localhost
 
-liaison:
-   path: /liaison
-   controller: App\Controller\LiaisonController::index
-   host: localhost
+# liaison:
+#    path: /liaison
+#    controller: App\Controller\LiaisonController::index
+#    host: localhost
 
 reserver:
-   path: /liaison/reserver
+   path: /reserver
    controller: App\Controller\ReserverController::index
    host: localhost
 
@@ -61,6 +61,6 @@ reglages:
    path: /reglages
    controller: App\Controller\CompteController::reglages
 
-social:
-   path: /contact/social
-   controller: App\Controller\ContactController::social
+# social:
+#    path: /contact/social
+#    controller: App\Controller\ContactController::social
